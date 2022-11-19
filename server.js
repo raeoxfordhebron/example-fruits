@@ -97,9 +97,37 @@ app.get("/fruits", (req, res) => {
 })
 
 // New Route
-app.get("fruits/new", (req, res) => {
+app.get("/fruits/new", (req, res) => {
     res.render("fruits/new.ejs")
 })
+
+// Update Route
+app.put("/fruits/:id", (req, res) => {
+    const id = req.params.id
+    //check if the readyToEat property should be true or false
+    req.body.readyToEat = req.body.readyToEat === "on" ? true : false
+    // update the fruit
+    Fruit.findByIdAndUpdate(id, req.body, {new: true}, (err, fruit) => {
+        res.redirect("/fruits")
+    })
+})
+
+// Create Route
+app.post("/fruits", (req, res) => {
+    req.body.readyToEat = req.body.readyToEat === "on" ? true : false
+    Fruit.create(req.body, (err, fruit) => {
+        res.redirect("/fruits")
+    })
+})
+
+// Edit Route
+app.get("/fruits/:id/edit", (req, res) => {
+    const id = req.params.id
+    Fruit.findById(id, (err, fruit) => {
+        res.render("fruits/edit.ejs", {fruit})
+    })
+})
+
 
 // Show Route
 app.get("/fruits/:id", (req, res) => {
