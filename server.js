@@ -87,12 +87,18 @@ app.get("/fruits/seed", (req, res) => {
     })
 })
 
+// Index Route
 app.get("/fruits", (req, res) => {
     // Get all fruits from Mongo and send them back
     Fruit.find({})
     .then((fruits) => {
         res.render("fruits/index.ejs", {fruits});
     })
+})
+
+// New Route
+app.get("fruits/new", (req, res) => {
+    res.render("fruits/new.ejs")
 })
 
 // Show Route
@@ -105,6 +111,8 @@ app.get("/fruits/:id", (req, res) => {
         res.render("fruits/show.ejs", {fruit})
     })
 })
+
+
 //////////////////////////////////////////////
 // Server Listener
 //////////////////////////////////////////////
