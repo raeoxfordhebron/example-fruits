@@ -101,6 +101,14 @@ app.get("/fruits/new", (req, res) => {
     res.render("fruits/new.ejs")
 })
 
+// Delete Route
+app.delete("/fruits/:id", (req, res) => {
+    const id = req.params.id
+    Fruit.findByIdAndRemove(id, (err, fruit) => {
+        res.redirect("/fruits")
+    })
+})
+
 // Update Route
 app.put("/fruits/:id", (req, res) => {
     const id = req.params.id
