@@ -75,7 +75,7 @@ app.get("/fruits/seed", (req, res) => {
         {name: "Grape", color: "purple", readyToEat: false},
         {name: "Banana", color: "orange", readyToEat: false},
         {name: "Strawberry", color: "red", readyToEat: false},
-        {name: "Coconut", color: "brown", readyToEat: false},
+        {name: "Coconut", color: "brown", readyToEat: true},
     ]
     // Delete all fruits
     Fruit.deleteMany({}, (err, data) => {
@@ -95,6 +95,16 @@ app.get("/fruits", (req, res) => {
     })
 })
 
+// Show Route
+app.get("/fruits/:id", (req, res) => {
+    // get the id from params
+    const id = req.params.id
+    // find the particular fruit from the database
+    Fruit.findById(id, (err, fruit) => { // findById comes from Mongoose
+        //render the template with the data from the database
+        res.render("fruits/show.ejs", {fruit})
+    })
+})
 //////////////////////////////////////////////
 // Server Listener
 //////////////////////////////////////////////
