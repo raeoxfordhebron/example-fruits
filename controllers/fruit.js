@@ -12,9 +12,6 @@ const router = express.Router()
 /////////////////////////////////////////
 // Routes
 /////////////////////////////////////////
-router.get("/", (req, res) => {
-    res.send("your server is running... better catch it")
-})
 
 router.get("/seed", (req, res) => {
     // array of starter fruits
